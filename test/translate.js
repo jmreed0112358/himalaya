@@ -18,12 +18,21 @@ describe('translations', function() {
       assert.equal(toHTML(himalaya.parse(str3)), str3);
     });
 
+    it('should work when tags and attributes are upper case',function()
+    {
+      var str1 = "<A HREF='foo.com/index.html'>FOO</A>";
+      assert.equal(toHTML(himalaya.parse(str1)), str1);
+    });
+
     it('should work for void elements', function() {
       var meta = "<meta charset='utf8'>";
       assert.equal(toHTML(himalaya.parse(meta)), meta);
 
       var link = "<link rel='stylesheet' href='file.css'>";
       assert.equal(toHTML(himalaya.parse(link)), link);
+
+      var linkUpper = "<link REL='stylesheet' HREF='file.css'>";
+      assert.equal(toHTML(himalaya.parse(linkUpper)), linkUpper);
     });
 
     it('should build data-* attributes properly', function() {
