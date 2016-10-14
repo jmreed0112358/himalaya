@@ -16,10 +16,14 @@ function serializeAttr(attr, value, isXml) {
 
 // stolen from underscore.string
 function dasherize(str) {
-  return str.trim()
-    .replace(/([A-Z])/g, '-$1')
-    .replace(/[-_\s]+/g, '-')
-    .toLowerCase();
+  if (isAllUpperCase(str)) {
+    return str;
+  } else {
+    return str.trim()
+      .replace(/([A-Z])/g, '-$1')
+      .replace(/[-_\s]+/g, '-')
+      .toLowerCase();
+  }
 }
 
 function inlineStyle(style) {
@@ -206,6 +210,10 @@ function doctypeShortcut(str) {
   if (has('Mobile')) return 'mobile';
   return 'html';
 }
+
+function isAllUpperCase(str) {
+  return str === str.toUpperCase();
+};
 
 module.exports = {
   toHTML: toHTML,
